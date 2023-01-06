@@ -52,11 +52,11 @@ public class GamePanel extends JPanel implements ActionListener {
 
     public void draw(Graphics g){
         if (running) {
-            g.setColor(Color.white);
+            /*g.setColor(Color.white);
             for(int i=0;i<SCREEN_HEIGHT/UNIT_SIZE;i++){
                 g.drawLine(i * UNIT_SIZE, 0, i * UNIT_SIZE, SCREEN_HEIGHT);
                 g.drawLine(0, i * UNIT_SIZE,  SCREEN_WIDTH, i * UNIT_SIZE);
-            }
+            }*/
             g.setColor(Color.red);
             g.fillOval(appleX, appleY, UNIT_SIZE, UNIT_SIZE);
 
@@ -68,6 +68,7 @@ public class GamePanel extends JPanel implements ActionListener {
                 }
                 else{
                     g.setColor(new Color(45,180,0));
+                    g.setColor(new Color(random.nextInt(255),random.nextInt(255),random.nextInt(255)));
                     g.fillRect(x_coordinates[i], y_coordinates[i], UNIT_SIZE, UNIT_SIZE);
 
                 }
@@ -124,13 +125,13 @@ public class GamePanel extends JPanel implements ActionListener {
         if(x_coordinates[0]<0){
             running = false;
         }
-        if(x_coordinates[0]>SCREEN_WIDTH){
+        if(x_coordinates[0]>SCREEN_WIDTH-1){
             running = false;
         }
         if(y_coordinates[0]<0){
             running = false;
         }
-        if(y_coordinates[0]>SCREEN_HEIGHT){
+        if(y_coordinates[0]>SCREEN_HEIGHT-1){
             running = false;
         }
         if(!running){
