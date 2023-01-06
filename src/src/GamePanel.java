@@ -58,10 +58,40 @@ public class GamePanel extends JPanel implements ActionListener {
         }
         g.setColor(Color.red);
         g.fillOval(appleX, appleY, UNIT_SIZE, UNIT_SIZE);
+
+        g.setColor(Color.white);
+        for(int i=0;i<bodyParts;i++){
+            if(i==0){
+                g.setColor(Color.green);
+                g.fillRect(x_coordinates[i], y_coordinates[i], UNIT_SIZE, UNIT_SIZE);
+            }
+            else{
+                g.setColor(new Color(45,180,0));
+                g.fillRect(x_coordinates[i], y_coordinates[i], UNIT_SIZE, UNIT_SIZE);
+
+            }
+        }
     }
 
     public void move(){
-
+        for(int i=bodyParts;i>0;i--){
+            x_coordinates[i] = x_coordinates[i-1];
+            y_coordinates[i] = y_coordinates[i-1];
+        }
+        switch(direction){
+            case 'U':
+                y_coordinates[0] = y_coordinates[0] - UNIT_SIZE;
+                break;
+            case 'D':
+                y_coordinates[0] = y_coordinates[0] + UNIT_SIZE;
+                break;
+            case 'L':
+                x_coordinates[0] = x_coordinates[0] - UNIT_SIZE;
+                break;
+            case 'R':
+                x_coordinates[0] = x_coordinates[0] + UNIT_SIZE;
+                break;
+        }
     }
 
     public void checkApple(){
@@ -78,7 +108,12 @@ public class GamePanel extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        if(running){
+            move();
+            checkApple();
+            checkCollisions();
+        }
+        repaint();
     }
 
     public class MyKeyAdapter extends KeyAdapter {
